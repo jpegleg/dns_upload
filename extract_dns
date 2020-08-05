@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# first cut out debug DNS log segment to decrypt to examine.txt
+grep REFUSED examine.txt | awk '{print $9}' | tr -d '():' | xxd -r -p | base64 -d > examine.in
+cat header examine.in footer > file.txt.asc
