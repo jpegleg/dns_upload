@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+cat file.txt | gpg --symmetric  --cipher=aes256 --always-trust --batch --armor --passphrase $1 --yes |
+  sed 's/-----BEGIN PGP MESSAGE-----//g' |
+   sed 's/Version: GnuPG v2.0.22 (GNU\/Linux)//g' |
+     sed 's/-----END PGP MESSAGE-----//g' |
+       base64 |
+         xxd -p |
+           fold -30 |
+             while read line; do
+               dig @$2 $line;
+             done
