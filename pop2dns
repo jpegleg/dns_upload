@@ -2,7 +2,7 @@
 
 cat file.txt | gpg --symmetric  --cipher=aes256 --always-trust --batch --armor --passphrase $1 --yes |
   sed 's/-----BEGIN PGP MESSAGE-----//g' |
-   sed 's/Version: GnuPG v2.0.22 (GNU\/Linux)//g' |
+   sed 's/Version: GnuPG .* (GNU\/Linux)//g' |
      sed 's/-----END PGP MESSAGE-----//g' |
        base64 |
          xxd -p |
